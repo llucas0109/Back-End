@@ -38,7 +38,8 @@ app.post('/users', (request,response) => {
   try{ //Ele tenta try mas se nao der ele pula para o catch() SEM travar o servidor!!
     if(age < 18) throw new Error("A mensagem que vai aparecer e essa") // throw new Error Faz Acontecer um erro propositalmente Fazendo Executar o 'catch' em seguida
   const user = {id:uuid.v4(), name, age }
-  users.push(user) 
+  setInterval(() => { //seta um tempo de espera antes de executar o primeiro parametro
+  users.push(user) },2000) // 2000 = 2 sg de espera
   return response.status(201).json(user)
   //500 erro do serve
   } catch(err) {  // catch(err) json(err.message) Exibe mensagem de erro que aparece. err "armazena" esse erro
@@ -61,12 +62,6 @@ app.delete('/users/:id', checkUserId, (request,response) => { //Podemos pegar co
   users.splice(index,1); //apilce(posiçao,1=elemina so ele 2 ou mais elimina o do lado)
   return response.status(204).json()
 })
-
-
-
-
-
-
 
 
 
